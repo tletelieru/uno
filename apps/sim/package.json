@@ -8,6 +8,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@uno/bots": "workspace:*",
     "@uno/engine": "workspace:*"
   },
   "devDependencies": {

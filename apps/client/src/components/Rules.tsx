@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useLocale, useMessages } from '../i18n/messages'
 import { rulesText } from '../i18n/rules'
 import { Overlay } from './Overlay'
+import { RuleIllustration } from './RuleIllustration'
 
 export function Rules({ onClose }: { onClose: () => void }) {
   const t = useMessages()
@@ -11,7 +12,7 @@ export function Rules({ onClose }: { onClose: () => void }) {
 
   return (
     <Overlay title={t.rules} parchment onClose={onClose}>
-      <div className="grid grid-cols-3 gap-1">
+      <div className="grid grid-cols-4 gap-1">
         {text.sections.map(({ tab: label }, index) => (
           <button
             key={label}
@@ -24,11 +25,18 @@ export function Rules({ onClose }: { onClose: () => void }) {
           </button>
         ))}
       </div>
-      <ul className="flex flex-col gap-2 text-sm leading-tight">
-        {section.rules.map((rule) => (
-          <li key={rule} className="flex gap-2">
-            <span aria-hidden="true" className="mt-1 size-2 shrink-0 bg-gold" />
-            {rule}
+      <ul className="flex flex-col gap-3 text-sm leading-tight">
+        {section.rules.map(({ text: rule, example }) => (
+          <li key={rule} className="flex flex-col gap-1.5">
+            <span className="flex gap-2">
+              <span aria-hidden="true" className="mt-1 size-2 shrink-0 bg-gold" />
+              <span>{rule}</span>
+            </span>
+            {example && (
+              <span aria-hidden="true" className="block pixel-box bg-black/10 px-2 py-2">
+                <RuleIllustration example={example} />
+              </span>
+            )}
           </li>
         ))}
       </ul>
