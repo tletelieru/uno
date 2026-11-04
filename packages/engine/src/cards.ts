@@ -35,3 +35,25 @@ export function createDeck(): Card[] {
   )
   return [...colored, ...wild]
 }
+
+export type Seat = number
+
+export type PlayerCount = 2 | 3 | 4 | 5 | 6
+
+export const PLAYER_COUNTS: PlayerCount[] = [2, 3, 4, 5, 6]
+
+export type WildCard = Extract<Card, { kind: 'wild' }>
+
+export type ColorCard = Extract<Card, { kind: 'color' }>
+
+export function isWild(card: Card): card is WildCard {
+  return card.kind === 'wild'
+}
+
+export function sameCard(a: Card, b: Card): boolean {
+  return cardId(a) === cardId(b)
+}
+
+export function isDrawCard(card: Card): boolean {
+  return card.face === 'draw2' || card.face === 'draw4'
+}
